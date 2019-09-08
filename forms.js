@@ -189,5 +189,5 @@ function addValidation(element) {
     element.style.border = "1px solid red";
     document.body.insertBefore(validationDiv, document.getElementById('f_ibm'));
 
-    if (element.type == 'checkbox' || element.type == 'radio') { element.parentNode.style.border = "1px solid red" }
+    //if (element.type == 'checkbox' || element.type == 'radio') { element.parentNode.style.border = "1px solid red" }
 }
