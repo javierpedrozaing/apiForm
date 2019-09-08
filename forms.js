@@ -13,7 +13,12 @@ var load = function (s, ident) {
     xhttp.send();
 }
 function validateForm() {
+    
     var button = document.querySelector('input[type=submit]');
+    
+
+    var inputText = document.querySelectorAll('input[type=text]');
+
     
     for (let index = 0; index < inputText.length; index++) {
         if (inputText[index].id == 'control_EMAIL') {
@@ -21,8 +26,6 @@ function validateForm() {
             inputText[index].type = 'email';
         }
     }
-
-    var inputText = document.querySelectorAll('input[type=text]');
     var inputNumber = document.querySelectorAll('input[type=number]');
     var textArea = document.getElementsByTagName('textarea')[0];
     var inputEmail = document.querySelectorAll('input[type=email]');
@@ -31,6 +34,7 @@ function validateForm() {
     var radioInput = document.querySelectorAll('input[type=radio]');
 
     button.addEventListener('click', function (event) {
+        
         var validated = document.getElementsByTagName("p");
         if (validated) {
             for (let index = 0; index < validated.length; index++) {
