@@ -65,12 +65,7 @@ function Array2Dom($array, $doc = null) {
             if ($value['_type'] == 'form') {
                 $formElement = $doc->createElement($value['_type']);
                 $newForm = $newNode->appendChild($formElement);                   
-                if ($value['_attributes']) {
-
-                    foreach ($value['_attributes'] as $key => $attr) {                
-                        $newElement->setAttribute($key, $attr);
-                    }             
-                }     
+                
             }
             
             if ($value['_type'] == 'select') {
@@ -102,9 +97,7 @@ function Array2Dom($array, $doc = null) {
                     foreach ($value['_children'] as $key => $child) {
                         $childElement = $doc->createElement($child['_type']);
                         $childNode = $newForm->appendChild($newElement);                                 
-                        //$newElementChild = $doc->createElement($value['_type']);
-                        //$newNodeChild = $doc->appendChild($newElement);    
-                        //$chidText = $child['_children'][0]['_children'][0]['_children'][0]['_children'][0]['_children'][0];          
+                        
                         if ($child['_type'] == '_text') {                                                   
                             $textNode = $doc->createTextNode($child['_content']);
                             $newTextNode = $newForm->appendChild($textNode);
@@ -117,9 +110,9 @@ function Array2Dom($array, $doc = null) {
             if ($value['_type'] == 'span') {
                 $spanElement = $doc->createElement($value['_type']);
                 $spanNode = $newForm->appendChild($newElement);                        
-                //print_r($value['_children']);
+                
                 foreach ($value['_children'] as $key => $child) {
-                    //print_r($child['_content']);
+                    
                     if ($child['_content'] != '*') {
                         $newSpan = $doc->createElement('span');
                         $textSpan = $doc->createTextNode($child['_content']);
