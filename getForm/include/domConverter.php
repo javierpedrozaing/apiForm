@@ -53,7 +53,6 @@ function Array2Dom($array, $doc = null) {
         //var_dump($currentNode);
     } 
 
-
     foreach ($array as $key => $value) {
         
         if (isset($value['_type'])) {
@@ -62,10 +61,20 @@ function Array2Dom($array, $doc = null) {
                 $newElement = $doc->createElement($value['_type']);
                 $newNode = $doc->appendChild($newElement);                        
             }
+
+            if ($value['_type'] == 'form') {
+                $formElement = $doc->createElement($value['_type']);
+                $newForm = $newNode->appendChild($formElement);                        
+            }
             
             if ($value['_type'] == 'select') {
                 $selectElement = $doc->createElement($value['_type']);
-                $selectNode = $doc->appendChild($newElement);                        
+                $selectNode = $newForm->appendChild($newElement);                        
+            }
+
+            if ($value['_type'] == 'input') {
+                $inputElement = $doc->createElement($value['_type']);
+                $inputNode = $newForm->appendChild($newElement);                        
             }
 
             if ($value['_type'] == 'option'){
@@ -88,7 +97,7 @@ function Array2Dom($array, $doc = null) {
                         //$chidText = $child['_children'][0]['_children'][0]['_children'][0]['_children'][0]['_children'][0];          
                         if ($child['_type'] == '_text') {                                                   
                             $textNode = $doc->createTextNode($child['_content']);
-                            $newTextNode = $newNode->appendChild($textNode);
+                            $newTextNode = $newForm->appendChild($textNode);
                         }
                         
                     }    
@@ -103,7 +112,7 @@ function Array2Dom($array, $doc = null) {
                         $newSpan = $doc->createElement('span');
                         $textSpan = $doc->createTextNode($child['_content']);
                         $spanText = $newSpan->appendChild($textSpan);   
-                        $nodeSpan = $newNode->appendChild($spanText);                     
+                        $nodeSpan = $newForm->appendChild($spanText);                     
                     }
                     
                 }
@@ -116,7 +125,7 @@ function Array2Dom($array, $doc = null) {
                         $newSpan = $doc->createElement('label');
                         $textSpan = $doc->createTextNode($child['_content']);
                         $spanText = $newSpan->appendChild($textSpan);   
-                        $newnodeSpan = $newNode->appendChild($spanText); 
+                        $newnodeSpan = $newForm->appendChild($spanText); 
                     }
                     if ($child['_type'] == 'a') {
                         foreach ($child['_children'] as $key => $children) {
